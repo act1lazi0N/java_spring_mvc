@@ -29,22 +29,20 @@
                                 <div class="mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
-                                            <h3>Delete user with id = ${id} </h3>
-                                            <div class="border-top my-4"></div>
-                                            <div class="alert alert-danger" role="alert">
-                                                Are you sure you want to delete this user?
+                                            <div class="card" style="width: 60%;">
+                                                <div class="card-header">
+                                                    <h3>User detail with id = ${user.id}</h3>
+                                                </div>
+                                                <div class="border-top my-4"></div>
+                                                <ul class="list-group-item ms-md-4">
+                                                    <li class="list-group-item">Email: ${user.email}</li>
+                                                    <li class="list-group-item">FullName: ${user.fullName}</li>
+                                                    <li class="list-group-item">Address: ${user.address}</li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    <form:form method="post" action="/admin/user/delete" modelAttribute="newUser">
-                                        <div class="mb-3" style="display: none;">
-                                            <label class="form-label">Id:</label>
-                                            <form:input value="${id}" type="text" class="form-control" path="id" />
-                                        </div>
-                                        <button class="btn btn-outline-danger mt-3">
-                                            Delete
-                                        </button>
-                                    </form:form>
+                                    <a href="/admin/user" class="btn btn-success mt-3">Back</a>
                                 </div>
 
                             </div>

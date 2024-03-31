@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "Role")
+@Table(name = "roles")
 public class Role {
 
   @Id
