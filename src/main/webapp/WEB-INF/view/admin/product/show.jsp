@@ -21,12 +21,51 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Product Manager</h1>
+                            <h1 class="mt-4">Manage Product</h1>
                             <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                <li class="breadcrumb-item active">Product</li>
+                                <li class="breadcrumb-item active">Table Products</li>
                             </ol>
-                            <div>Product</div>
+                            <div class="mt-5">
+                                <div class="row">
+                                    <div class="col-12 mx-auto">
+                                        <div class="d-flex justify-content-between">
+                                            <h3>Table Users</h3>
+                                            <a href="/admin/product/create" class="btn btn-primary">Create product</a>
+                                        </div>
+                                        <div class="border-top my-3"></div>
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Factory</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:forEach var="user" items="${users1}">
+                                                    <tr>
+                                                        <th scope="row">${user.id}</th>
+                                                        <td>${user.email}</td>
+                                                        <td>${user.fullName}</td>
+                                                        <td>${user.role.name}</td>
+                                                        <td>
+                                                            <a href="/admin/user/${user.id}"
+                                                                class="btn btn-outline-success">View</a>
+                                                            <a href="/admin/user/update/${user.id}"
+                                                                class="btn btn-outline-warning mx-2">Update</a>
+                                                            <a href="/admin/user/delete/${user.id}"
+                                                                class="btn btn-outline-danger">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </main>
                     <jsp:include page="../layout/footer.jsp" />

@@ -22,49 +22,63 @@
                     <jsp:include page="../layout/sidebar.jsp" />
                     <div id="layoutSidenav_content">
                         <main>
-                            <div class="container-fluid ">
-                                <h1 class="mt-4">Manage Users</h1>
+                            <div class="container-fluid px-4">
+                                <h1 class="mt-4">Manage Product</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item active">Users</li>
+                                    <li class="breadcrumb-item active">Product</li>
                                 </ol>
                                 <div class="mt-5">
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Create a user</h3>
+                                            <h3>Manage Products</h3>
                                             <hr />
-                                            <form:form method="post" action="/admin/user/create"
-                                                modelAttribute="newUser" class="row" enctype="multipart/form-data">
+                                            <form:form method="post" action="/admin/product/create"
+                                                modelAttribute="newProduct" class="row" enctype="multipart/form-data">
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Email:</label>
-                                                    <form:input type="email" class="form-control" path="email" />
+                                                    <label class="form-label">Name:</label>
+                                                    <form:input type="text" class="form-control" path="name" />
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Password:</label>
-                                                    <form:input type="password" class="form-control" path="password" />
-                                                </div>
-                                                <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Phone number:</label>
-                                                    <form:input type="text" class="form-control" path="phone" />
-                                                </div>
-                                                <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Full Name:</label>
-                                                    <form:input type="text" class="form-control" path="fullName" />
+                                                    <label class="form-label">Price:</label>
+                                                    <form:input type="text" class="form-control" path="price" />
                                                 </div>
                                                 <div class="mb-3 col-12">
-                                                    <label class="form-label">Address:</label>
-                                                    <form:input type="text" class="form-control" path="address" />
+                                                    <label class="form-label">Detail description</label>
+                                                    <form:textarea type="text" class="form-control" path="detailDesc" />
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Short description</label>
+                                                    <form:input type="text" class="form-control" path="shortDesc" />
                                                 </div>
 
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Role:</label>
-                                                    <form:select class="form-select" path="role.name">
-                                                        <form:option value="ADMIN">ADMIN</form:option>
-                                                        <form:option value="USER">USER</form:option>
+                                                    <label class="form-label">Quantity</label>
+                                                    <form:input type="number" class="form-control" path="quantity" />
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Factory:</label>
+                                                    <form:select class="form-select" path="factory">
+                                                        <form:option value="ASUS">Asus</form:option>
+                                                        <form:option value="LENOVO">Lenovo</form:option>
+                                                        <form:option value="ACER">Acer</form:option>
+                                                        <form:option value="DELL">Dell</form:option>
+                                                        <form:option value="HP">HP</form:option>
+                                                        <form:option value="MACBOOK">Macbook (Apple)</form:option>
                                                     </form:select>
                                                 </div>
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label for="avatarFile" class="form-label">Avatar:</label>
+                                                    <label class="form-label">Target:</label>
+                                                    <form:select class="form-select" path="target">
+                                                        <form:option value="Offices">Văn phòng</form:option>
+                                                        <form:option value="Gamings">Gaming</form:option>
+                                                        <form:option value="Graphics">Đồ họa</form:option>
+                                                        <form:option value="Business">Doanh nghiệp</form:option>
+                                                    </form:select>
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="avatarFile" class="form-label">Image:</label>
                                                     <input class="form-control" type="file" id="avatarFile"
                                                         accept=".png, .jpg, .jpeg" name="actilazionFile" />
                                                 </div>

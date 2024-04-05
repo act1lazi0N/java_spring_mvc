@@ -79,38 +79,38 @@
                     <div class="tab-class text-center">
                         <div class="row g-4">
                             <div class="col-lg-4 text-start">
-                                <h1>Our Organic Products</h1>
+                                <h1>Sản phẩm nổi bật</h1>
                             </div>
                             <div class="col-lg-8 text-end">
                                 <ul class="nav nav-pills d-inline-flex text-center mb-5">
                                     <li class="nav-item">
                                         <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill"
                                             href="#tab-1">
-                                            <span class="text-dark" style="width: 130px;">All Products</span>
+                                            <span class="text-dark" style="width: 130px;">Tất cả</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="d-flex py-2 m-2 bg-light rounded-pill" data-bs-toggle="pill"
                                             href="#tab-2">
-                                            <span class="text-dark" style="width: 130px;">Vegetables</span>
+                                            <span class="text-dark" style="width: 130px;">Office</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill"
                                             href="#tab-3">
-                                            <span class="text-dark" style="width: 130px;">Fruits</span>
+                                            <span class="text-dark" style="width: 130px;">Gaming</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill"
                                             href="#tab-4">
-                                            <span class="text-dark" style="width: 130px;">Bread</span>
+                                            <span class="text-dark" style="width: 130px;">Design</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="d-flex m-2 py-2 bg-light rounded-pill" data-bs-toggle="pill"
                                             href="#tab-5">
-                                            <span class="text-dark" style="width: 130px;">Meat</span>
+                                            <span class="text-dark" style="width: 130px;">Business</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -588,10 +588,10 @@
             <!-- JavaScript Libraries -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="lib/easing/easing.min.js"></script>
-            <script src="lib/waypoints/waypoints.min.js"></script>
-            <script src="lib/lightbox/js/lightbox.min.js"></script>
-            <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+            <script src="client/lib/easing/easing.min.js"></script>
+            <script src="client/lib/waypoints/waypoints.min.js"></script>
+            <script src="client/lib/lightbox/js/lightbox.min.js"></script>
+            <script src="client/lib/owlcarousel/owl.carousel.min.js"></script>
 
             <!-- Template Javascript -->
             <script src="client/js/main.js"></script>
