@@ -81,14 +81,17 @@ public class UserController {
   public String createUserPage(
     Model model,
     @Valid @ModelAttribute("newUser") User actilazion,
-    BindingResult bindingResult,
+    BindingResult newUserBindingResult,
     @RequestParam("actilazionFile") MultipartFile file
   ) {
-    List<FieldError> errors = bindingResult.getFieldErrors();
+    List<FieldError> errors = newUserBindingResult.getFieldErrors();
     for (FieldError error : errors) {
       System.out.println(
-        ">>>>>>" + error.getObjectName() + "- " + error.getDefaultMessage()
+        ">>>>>>" + error.getField() + "- " + error.getDefaultMessage()
       );
+    }
+    if (newUserBindingResult.hasErrors()) {
+      return "/admin/user/create";
     }
     // this.userService.handleSaveUser(actilazion);
     String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
