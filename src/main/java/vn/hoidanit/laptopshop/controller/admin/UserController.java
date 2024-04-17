@@ -6,7 +6,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -80,20 +79,22 @@ public class UserController {
   @PostMapping("/admin/user/create")
   public String createUserPage(
     Model model,
-    @Valid @ModelAttribute("newUser") User actilazion,
+    @ModelAttribute("newUser") @Valid User actilazion,
     BindingResult newUserBindingResult,
     @RequestParam("actilazionFile") MultipartFile file
   ) {
-    List<FieldError> errors = newUserBindingResult.getFieldErrors();
-    for (FieldError error : errors) {
-      System.out.println(
-        ">>>>>>" + error.getField() + "- " + error.getDefaultMessage()
-      );
-    }
+    // List<FieldError> errors = newUserBindingResult.getFieldErrors();
+    // for (FieldError error : errors) {
+    // System.out.println(">>>>" + error.getField() + " - " +
+    // error.getDefaultMessage());
+    // }
+
+    // validate
     if (newUserBindingResult.hasErrors()) {
-      return "/admin/user/create";
+      return "admin/user/create";
     }
-    // this.userService.handleSaveUser(actilazion);
+
+    //
     String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
     String hashPassword = this.passwordEncoder.encode(actilazion.getPassword());
 
@@ -102,7 +103,6 @@ public class UserController {
     actilazion.setRole(
       this.userService.getRoleByName(actilazion.getRole().getName())
     );
-
     // save
     this.userService.handleSaveUser(actilazion);
     return "redirect:/admin/user";

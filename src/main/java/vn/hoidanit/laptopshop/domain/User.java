@@ -10,8 +10,10 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.List;
+import vn.hoidanit.laptopshop.service.validator.StrongPassword;
 
 @Entity
 @Table(name = "users")
@@ -28,8 +30,8 @@ public class User {
   )
   private String email;
 
-  @NotBlank(message = "Không được để trống trường này")
-  @Size(min = 2, message = "Password phải có tối thiểu 2 ký tự")
+  @NotNull
+  @StrongPassword(message = "Mật khẩu phải có tối thiểu 8 ký tự!")
   private String password;
 
   @NotBlank(message = "Không được để trống trường này")
