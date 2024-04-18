@@ -31,7 +31,8 @@ public class User {
   private String email;
 
   @NotNull
-  @StrongPassword(message = "Mật khẩu phải có tối thiểu 8 ký tự!")
+  @Size(min = 3, message = "Tên phải có tối thiểu 3 ký tự")
+  // @StrongPassword(message = "Mật khẩu phải có tối thiểu 8 ký tự!")
   private String password;
 
   @NotBlank(message = "Không được để trống trường này")
