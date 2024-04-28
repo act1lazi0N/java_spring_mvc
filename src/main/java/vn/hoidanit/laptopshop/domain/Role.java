@@ -16,6 +16,14 @@ public class Role {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  public List<User> getUsers() {
+    return users;
+  }
+
+  public void setUsers(List<User> users) {
+    this.users = users;
+  }
+
   private String name;
 
   private String description;

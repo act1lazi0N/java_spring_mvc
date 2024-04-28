@@ -1,5 +1,7 @@
 package vn.hoidanit.laptopshop.controller.client;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,7 +36,7 @@ public class HomePageController {
   }
 
   @GetMapping("/")
-  public String getHomePage(Model model) {
+  public String getHomePage(Model model, HttpServletRequest request) {
     List<Product> products = this.productService.fetchProducts();
     model.addAttribute("products", products);
     return "client/homepage/show";
@@ -53,12 +55,6 @@ public class HomePageController {
   ) {
     if (bindingResult.hasErrors()) {
       return "client/auth/register";
-    }
-    List<FieldError> errors = bindingResult.getFieldErrors();
-    for (FieldError error : errors) {
-      System.out.println(
-        ">>>>" + error.getField() + " - " + error.getDefaultMessage()
-      );
     }
     User user = this.userService.registerDTOToUser(registerDTO);
     String hashPassword = this.passwordEncoder.encode(user.getPassword());
