@@ -56,22 +56,6 @@ public class User {
   @OneToOne(mappedBy = "user")
   private Cart cart;
 
-  public Role getRole() {
-    return role;
-  }
-
-  public void setRole(Role role) {
-    this.role = role;
-  }
-
-  public List<Order> getOrders() {
-    return orders;
-  }
-
-  public void setOrders(List<Order> orders) {
-    this.orders = orders;
-  }
-
   public long getId() {
     return id;
   }
@@ -128,24 +112,27 @@ public class User {
     this.avatar = avatar;
   }
 
-  @Override
-  public String toString() {
-    return (
-      "User [id=" +
-      id +
-      ", email=" +
-      email +
-      ", password=" +
-      password +
-      ", fullName=" +
-      fullName +
-      ", address=" +
-      address +
-      ", phone=" +
-      phone +
-      ", avatar=" +
-      avatar +
-      "]"
-    );
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
+
+  public List<Order> getOrders() {
+    return orders;
+  }
+
+  public void setOrders(List<Order> orders) {
+    this.orders = orders;
+  }
+
+  public Cart getCart() {
+    return cart;
+  }
+
+  public void setCart(Cart cart) {
+    this.cart = cart;
   }
 }
