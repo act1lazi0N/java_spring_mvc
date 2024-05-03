@@ -2,6 +2,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
                 <!DOCTYPE html>
                 <html lang="en">
 
@@ -78,7 +79,7 @@
                                                 </td>
                                             </tr>
                                         </c:if>
-                                        <c:forEach var="cartDetail" items="${cartDetails}">
+                                        <c:forEach var="cartDetail" items="${cartDetails}" varStatus="status">
 
                                             <tr>
                                                 <th scope="row">
@@ -112,7 +113,8 @@
                                                             class="form-control form-control-sm text-center border-0"
                                                             value="${cartDetail.quantity}"
                                                             data-cart-detail-id="${cartDetail.id}"
-                                                            data-cart-detail-price="${cartDetail.price}">
+                                                            data-cart-detail-price="${cartDetail.price}"
+                                                            data-cart-detail-index="${status.index}">
                                                         <div class="input-group-btn">
                                                             <button
                                                                 class="btn btn-sm btn-plus rounded-circle bg-light border">
@@ -128,7 +130,7 @@
                                                     </p>
                                                 </td>
                                                 <td>
-                                                    <form action="/delete-cart-product/${cartDetail.id}" method="POST">
+                                                    <form method="post" action="/delete-cart-product/${cartDetail.id}">
                                                         <input type="hidden" name="${_csrf.parameterName}"
                                                             value="${_csrf.token}" />
                                                         <button class="btn btn-md rounded-circle bg-light border mt-4">
@@ -136,7 +138,6 @@
                                                         </button>
                                                     </form>
                                                 </td>
-
                                             </tr>
                                         </c:forEach>
 
@@ -146,7 +147,6 @@
                             <c:if test="${not empty cartDetails}">
                                 <div class="mt-5 row g-4 justify-content-start">
                                     <div class="col-12 col-md-8">
-
                                         <div class="bg-light rounded">
                                             <div class="p-4">
                                                 <h1 class="display-6 mb-4">Thông Tin <span class="fw-normal">Đơn
@@ -175,35 +175,35 @@
                                             <form:form action="/confirm-checkout" method="post" modelAttribute="cart">
                                                 <input type="hidden" name="${_csrf.parameterName}"
                                                     value="${_csrf.token}" />
-                                                <div style="display: block;"></div>
-                                                <c:forEach var="cartDetail" items="${cart.cartDetails}"
-                                                    varStatus="status">
-                                                    <div class="mb-3">
-                                                        <div class="form-group">
-                                                            <label>Id:</label>
-                                                            <form:input class="form-control" type="text"
-                                                                value="${cartDetail.id}"
-                                                                path="cartDetails[${status.index}].id" />
+                                                <div style="display: block;">
+                                                    <c:forEach var="cartDetail" items="${cart.cartDetails}"
+                                                        varStatus="status">
+                                                        <div class="mb-3">
+                                                            <div class="form-group">
+                                                                <label>Id:</label>
+                                                                <form:input class="form-control" type="text"
+                                                                    value="${cartDetail.id}"
+                                                                    path="cartDetails[${status.index}].id" />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Quantity:</label>
+                                                                <form:input class="form-control" type="text"
+                                                                    value="${cartDetail.quantity}"
+                                                                    path="cartDetails[${status.index}].quantity" />
+                                                            </div>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label>Quantity:</label>
-                                                            <form:input class="form-control" type="text"
-                                                                value="${cartDetail.quantity}"
-                                                                path="cartDetails[${status.index}].quantity" />
-                                                        </div>
-                                                    </div>
-                                                </c:forEach>
+                                                    </c:forEach>
+                                                </div>
+                                                <button
+                                                    class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">Xác
+                                                    nhận thanh toán
+                                                </button>
+                                            </form:form>
                                         </div>
-                                        <button
-                                            class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">Xác
-                                            nhận thanh toán
-                                        </button>
-                                        </form:form>
                                     </div>
                                 </div>
+                            </c:if>
                         </div>
-                        </c:if>
-                    </div>
                     </div>
                     <!-- Cart Page End -->
 
