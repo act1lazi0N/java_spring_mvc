@@ -6,10 +6,14 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import vn.hoidanit.laptopshop.domain.Cart;
 import vn.hoidanit.laptopshop.domain.CartDetail;
+import vn.hoidanit.laptopshop.domain.Order;
+import vn.hoidanit.laptopshop.domain.OrderDetail;
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.repository.CartDetailRepository;
 import vn.hoidanit.laptopshop.repository.CartRepository;
+import vn.hoidanit.laptopshop.repository.OrderDetailRepository;
+import vn.hoidanit.laptopshop.repository.OrderRepository;
 import vn.hoidanit.laptopshop.repository.ProductRepository;
 
 @Service
@@ -19,17 +23,23 @@ public class ProductService {
   private final CartRepository cartRepository;
   private final CartDetailRepository cartDetailRepository;
   private final UserService userService;
+  private final OrderRepository orderRepository;
+  private final OrderDetailRepository orderDetailRepository;
 
   public ProductService(
     ProductRepository productRepository,
     CartRepository cartRepository,
     CartDetailRepository cartDetailRepository,
-    UserService userService
+    UserService userService,
+    OrderRepository orderRepository,
+    OrderDetailRepository orderDetailRepository
   ) {
     this.productRepository = productRepository;
     this.cartRepository = cartRepository;
     this.cartDetailRepository = cartDetailRepository;
     this.userService = userService;
+    this.orderRepository = orderRepository;
+    this.orderDetailRepository = orderDetailRepository;
   }
 
   public Product createProduct(Product pr) {
@@ -92,7 +102,7 @@ public class ProductService {
           this.cartDetailRepository.save(cartDetail);
 
           // update cart (sum);
-          int s = (cart.getSum()) + 1;
+          int s = cart.getSum() + 1;
           cart.setSum(s);
           this.cartRepository.save(cart);
           session.setAttribute("sum", s);
@@ -134,6 +144,47 @@ public class ProductService {
         CartDetail currentCartDetail = cdOptional.get();
         currentCartDetail.setQuantity(cartDetail.getQuantity());
         this.cartDetailRepository.save(currentCartDetail);
+      }
+    }
+  }
+
+  public void handlePlaceOrder(
+    User user,
+    HttpSession session,
+    String receiverName,
+    String receiverAddress,
+    String receiverPhone
+  ) {
+    // create order
+    Order order = new Order();
+    order.setUser(user);
+    order.setReceiverName(receiverName);
+    order.setReceiverAddress(receiverAddress);
+    order.setReceiverPhone(receiverPhone);
+    order = this.orderRepository.save(order);
+
+    // create orderDetail
+    // S1: Get cart by user
+    Cart cart = this.cartRepository.findByUser(user);
+    if (cart != null) {
+      List<CartDetail> cartDetails = cart.getCartDetails();
+      if (cartDetails != null) {
+        for (CartDetail cartDetail : cartDetails) {
+          OrderDetail orderDetail = new OrderDetail();
+          orderDetail.setOrder(order);
+          orderDetail.setProduct(cartDetail.getProduct());
+          orderDetail.setPrice(cartDetail.getPrice());
+          orderDetail.setQuantity(cartDetail.getQuantity());
+          this.orderDetailRepository.save(orderDetail);
+        }
+        // S2: delete cartDetail and Cart
+        for (CartDetail cartDetail : cartDetails) {
+          this.cartDetailRepository.deleteById(cartDetail.getId());
+        }
+        this.cartDetailRepository.deleteById(cart.getId());
+
+        // S3: Update Session
+        session.setAttribute("sum", 0);
       }
     }
   }
