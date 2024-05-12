@@ -75,7 +75,7 @@
                                             <nav aria-label="Page navigation example">
                                                 <ul class="pagination justify-content-center">
                                                     <li class="page-item">
-                                                        <a class="${1 eq currentPage ? 'disabled page-link text-muted' : 'page-link'}"
+                                                        <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
                                                             href="/admin/product?page=${currentPage - 1}"
                                                             aria-label="Previous">
                                                             <span aria-hidden="true">&laquo;</span>
