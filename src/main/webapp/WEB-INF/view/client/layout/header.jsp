@@ -16,6 +16,7 @@
                             id="navbarCollapse">
                             <div class="navbar-nav">
                                 <a href="/" class="nav-item nav-link active">Trang chủ</a>
+                                <a href="/products" class="nav-item nav-link active">Sản phẩm</a>
                             </div>
                             <div class="d-flex m-3 me-0">
                                 <c:if test="${not empty pageContext.request.userPrincipal}">

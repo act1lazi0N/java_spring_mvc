@@ -1,6 +1,8 @@
 package vn.hoidanit.laptopshop.repository;
 
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import vn.hoidanit.laptopshop.domain.User;
@@ -13,7 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
   List<User> findOneByEmail(String email);
 
-  List<User> findAll();
+  Page<User> findAll(Pageable page);
 
   User findById(long id);
 
