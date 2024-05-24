@@ -187,9 +187,9 @@ public class ItemController {
     }
 
     Pageable pageable = PageRequest.of(page - 1, 60);
-    // String name = nameOptional.isPresent() ? nameOptional.get() : "";
-    // Page<Product> prs =
-    //   this.productService.fetchProductsWithSpec(pageable, name);
+    String name = nameOptional.isPresent() ? nameOptional.get() : "";
+    Page<Product> prs =
+      this.productService.fetchProductsWithSpec(pageable, name);
 
     // case 1
     // double min = minOptional.isPresent()
@@ -221,9 +221,9 @@ public class ItemController {
     //   this.productService.fetchProductsWithSpec(pageable, price);
 
     // case 6
-    List<String> price = Arrays.asList(priceOptional.get().split(","));
-    Page<Product> prs =
-      this.productService.fetchProductsWithSpec(pageable, price);
+    // List<String> price = Arrays.asList(priceOptional.get().split(","));
+    // Page<Product> prs =
+    //   this.productService.fetchProductsWithSpec(pageable, price);
 
     List<Product> listProducts = prs.getContent();
     model.addAttribute("products", listProducts);
