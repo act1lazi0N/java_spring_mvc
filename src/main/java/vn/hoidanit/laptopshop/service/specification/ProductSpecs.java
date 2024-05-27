@@ -30,10 +30,15 @@ public class ProductSpecs {
       criteriaBuilder.equal(root.get(Product_.FACTORY), factory);
   }
 
-  // case 4
   public static Specification<Product> matchListFactory(List<String> factory) {
     return (root, query, criteriaBuilder) ->
       criteriaBuilder.in(root.get(Product_.FACTORY)).value(factory);
+  }
+
+  // case 4.2
+  public static Specification<Product> matchListTarget(List<String> target) {
+    return (root, query, criteriaBuilder) ->
+      criteriaBuilder.in(root.get(Product_.TARGET)).value(target);
   }
 
   // case 5
