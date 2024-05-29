@@ -43,7 +43,7 @@ public class SecurityConfiguration {
   }
 
   @Bean
-  public AuthenticationSuccessHandler CustomSuccessHandler() {
+  public AuthenticationSuccessHandler customSuccessHandler() {
     return new CustomSuccessHandler();
   }
 
@@ -52,11 +52,13 @@ public class SecurityConfiguration {
     SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
     // optionally customize
     rememberMeServices.setAlwaysRemember(true);
+
     return rememberMeServices;
   }
 
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    // v6. lamda
     http
       .authorizeHttpRequests(authorize ->
         authorize
@@ -65,15 +67,16 @@ public class SecurityConfiguration {
             DispatcherType.INCLUDE
           )
           .permitAll()
-          // ROLE_ADMIN
           .requestMatchers(
             "/",
             "/login",
+            "/product/**",
+            "/register",
+            "/products/**",
             "/client/**",
             "/css/**",
             "/js/**",
-            "/images/**",
-            "/product/**"
+            "/images/**"
           )
           .permitAll()
           .requestMatchers("/admin/**")
@@ -81,22 +84,26 @@ public class SecurityConfiguration {
           .anyRequest()
           .authenticated()
       )
-      .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
       .sessionManagement(sessionManagement ->
         sessionManagement
           .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
           .invalidSessionUrl("/logout?expired")
           .maximumSessions(1)
           .maxSessionsPreventsLogin(false)
-      ) //.logout(logout>logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
+      )
+      .logout(logout ->
+        logout.deleteCookies("JSESSIONID").invalidateHttpSession(true)
+      )
+      .rememberMe(r -> r.rememberMeServices(rememberMeServices()))
       .formLogin(formLogin ->
         formLogin
           .loginPage("/login")
           .failureUrl("/login?error")
-          .successHandler(CustomSuccessHandler())
+          .successHandler(customSuccessHandler())
           .permitAll()
       )
       .exceptionHandling(ex -> ex.accessDeniedPage("/access-deny"));
+
     return http.build();
   }
 }

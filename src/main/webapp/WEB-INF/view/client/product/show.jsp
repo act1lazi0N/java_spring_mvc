@@ -35,6 +35,13 @@
 
                     <!-- Template Stylesheet -->
                     <link href="/client/css/style.css" rel="stylesheet">
+                    <style>
+                        .page-link.disabled {
+                            color: var(--bs-pagination-disabled-color);
+                            pointer-events: none;
+                            background-color: var(--bs-pagination-disabled-bg);
+                        }
+                    </style>
                 </head>
 
                 <body>
@@ -163,7 +170,7 @@
                                                     <label class="form-check-label" for="price-5">Trên 20 triệu</label>
                                                 </div>
                                             </div>
-                                            <div class="col-12" id="sortFilter">
+                                            <div class="col-12">
                                                 <div class="mb-2"><b>Sắp xếp</b></div>
 
                                                 <div class="form-check form-check-inline">
@@ -179,8 +186,8 @@
                                                 </div>
 
                                                 <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" id="sort-3"
-                                                        value="gia-nothing" name="radio-sort" checked>
+                                                    <input class="form-check-input" type="radio" id="sort-3" checked
+                                                        value="gia-nothing" name="radio-sort">
                                                     <label class="form-check-label" for="sort-3">Không sắp xếp</label>
                                                 </div>
 
@@ -196,7 +203,7 @@
                                     </div>
                                     <div class="col-12 col-md-8 text-center">
                                         <div class="row g-4">
-                                            <c:if test="${totalPages == 0}">
+                                            <c:if test="${totalPages ==  0}">
                                                 <div>Không tìm thấy sản phẩm</div>
                                             </c:if>
                                             <c:forEach var="product" items="${products}">
@@ -243,6 +250,8 @@
                                                     </div>
                                                 </div>
                                             </c:forEach>
+
+
                                             <c:if test="${totalPages > 0}">
                                                 <div class="pagination d-flex justify-content-center mt-5">
                                                     <li class="page-item">

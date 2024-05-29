@@ -184,7 +184,9 @@ public class ItemController {
     } catch (Exception e) {
       // TODO: handle exception
     }
+    // CHECK SORT PRICE
     Pageable pageable = PageRequest.of(page - 1, 3);
+
     if (
       productCriteriaDTO.getSort() != null &&
       productCriteriaDTO.getSort().isPresent()
@@ -208,7 +210,7 @@ public class ItemController {
     String qs = request.getQueryString();
     if (qs != null && !qs.isBlank()) {
       // remove page
-      qs = qs.replace("page =" + page, "");
+      qs = qs.replace("page=" + page, "");
     }
 
     model.addAttribute("products", listProducts);

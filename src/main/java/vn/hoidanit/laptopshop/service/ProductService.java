@@ -87,6 +87,7 @@ public class ProductService {
       );
       combinedSpec = combinedSpec.and(currentSpecs);
     }
+
     if (
       productCriteriaDTO.getPrice() != null &&
       productCriteriaDTO.getPrice().isPresent()
@@ -95,31 +96,35 @@ public class ProductService {
         this.buildPriceSpecification(productCriteriaDTO.getPrice().get());
       combinedSpec = combinedSpec.and(currentSpecs);
     }
+
     return this.productRepository.findAll(combinedSpec, page);
   }
 
   // case 6
   public Specification<Product> buildPriceSpecification(List<String> price) {
-    Specification<Product> combinedSpec = Specification.where(null);
+    Specification<Product> combinedSpec = Specification.where(null); // disconjunction
     for (String p : price) {
       double min = 0;
       double max = 0;
 
       // Set the appropriate min and max based on the price range string
       switch (p) {
-        case "10-toi-15-trieu":
+        case "duoi-10-trieu":
+          min = 1;
+          max = 10000000;
+          break;
+        case "10-15-trieu":
           min = 10000000;
           max = 15000000;
           break;
-        case "15-toi-20-trieu":
+        case "15-20-trieu":
           min = 15000000;
           max = 20000000;
           break;
-        case "20-toi-30-trieu":
+        case "tren-20-trieu":
           min = 20000000;
-          max = 30000000;
+          max = 200000000;
           break;
-        // Add more cases as needed
       }
 
       if (min != 0 && max != 0) {
@@ -130,6 +135,7 @@ public class ProductService {
         combinedSpec = combinedSpec.or(rangeSpec);
       }
     }
+
     return combinedSpec;
   }
 
